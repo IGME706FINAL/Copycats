@@ -4,7 +4,10 @@ using UnityEngine.InputSystem;
 public class PlayerBehviour : MonoBehaviour
 {
     public float speed;
-    
+    public PlayerInput PlayerInput;
+    private Vector2 moveInput;
+    public InputAction Move;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,5 +18,11 @@ public class PlayerBehviour : MonoBehaviour
     void Update()
     {
         
+    }
+
+
+    void OnMove(InputValue value)
+    {
+        moveInput = value.Get<Vector2>();
     }
 }
