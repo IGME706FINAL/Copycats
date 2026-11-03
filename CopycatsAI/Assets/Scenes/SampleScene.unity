@@ -432,12 +432,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1521428736 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 120886359474254698, guid: d38baf4814260aa4e9ab9ed529b3d209, type: 3}
+  m_PrefabInstance: {fileID: 5726834720631729992}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1521428737 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6192844062366602230, guid: d38baf4814260aa4e9ab9ed529b3d209, type: 3}
   m_PrefabInstance: {fileID: 5726834720631729992}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1521428736}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
@@ -638,7 +643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7183599391120583748, guid: d38baf4814260aa4e9ab9ed529b3d209, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.35
+      value: 0.35000038
       objectReference: {fileID: 0}
     - target: {fileID: 7183599391120583748, guid: d38baf4814260aa4e9ab9ed529b3d209, type: 3}
       propertyPath: m_LocalPosition.z
@@ -672,7 +677,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8847146791615616419, guid: d38baf4814260aa4e9ab9ed529b3d209, type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7183599391120583748, guid: d38baf4814260aa4e9ab9ed529b3d209, type: 3}
@@ -728,6 +738,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5722290279806527263, guid: 8540e9e285a10f243abd80b09b6c1d7b, type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5722290279806527263, guid: 8540e9e285a10f243abd80b09b6c1d7b, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1521428736}
     - target: {fileID: 8012958444062415551, guid: 8540e9e285a10f243abd80b09b6c1d7b, type: 3}
       propertyPath: m_Name
       value: Copycat
