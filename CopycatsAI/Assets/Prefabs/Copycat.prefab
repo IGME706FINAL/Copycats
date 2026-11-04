@@ -156,5 +156,6 @@ MonoBehaviour:
   distractPercent: 0
   speed: 0
   Player: {fileID: 0}
-  seperation: 0
+  seperationThresh: 5
+  decayCoefficent: 2
   catstate: 0
