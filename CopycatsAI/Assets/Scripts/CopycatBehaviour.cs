@@ -49,6 +49,10 @@ public class CopycatBehaviour : MonoBehaviour
             SeekPlayer();
             Seperate();
         }
+        if (catstate == State.Idle)
+        {
+            rb.linearVelocity = new Vector3(0, 0, 0);
+        }
     }
 
     void SeekPlayer()
@@ -78,11 +82,13 @@ public class CopycatBehaviour : MonoBehaviour
 
     public void StateIdle()
     {
+        Debug.Log("Idle called");
         catstate = State.Idle;
     }
 
     public void StateFollow()
     {
+        Debug.Log("Follow called");
         catstate = State.Follow;
     }
 
@@ -107,7 +113,7 @@ public class CopycatBehaviour : MonoBehaviour
         if (other.gameObject == Player)
         {
             hearCommands = true;
-            Debug.Log("Can hear commands");
+           // Debug.Log("Can hear commands");
         }
     }
 
@@ -116,7 +122,7 @@ public class CopycatBehaviour : MonoBehaviour
         if (other.gameObject == Player)
         {
             hearCommands = false;
-            Debug.Log("Cant hear commands");
+           // Debug.Log("Cant hear commands");
         }
     }
 }
