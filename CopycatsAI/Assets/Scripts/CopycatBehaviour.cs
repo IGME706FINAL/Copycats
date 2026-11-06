@@ -14,6 +14,8 @@ public class CopycatBehaviour : MonoBehaviour
     };
     //percent to be distracted
     public float distractPercent;
+    //affinity to player
+    public float affinity;
     //speed
     public float speed;
     //player object
@@ -25,6 +27,10 @@ public class CopycatBehaviour : MonoBehaviour
     public State catstate;
     //rigidbody
     private Rigidbody rb;
+    //bool for testing reinforcment
+    public bool learningOn;
+    //can recieve commands
+    public bool hearCommands;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -67,6 +73,50 @@ public class CopycatBehaviour : MonoBehaviour
             float strength = Mathf.Min(decayCoefficent / (distance * distance), speed);
             direction.Normalize();
             rb.linearVelocity += strength * -direction;
+        }
+    }
+
+    public void StateIdle()
+    {
+        catstate = State.Idle;
+    }
+
+    public void StateFollow()
+    {
+        catstate = State.Follow;
+    }
+
+    public void StateDistracted()
+    {
+        if(catstate == State.Carry) Drop();
+        catstate = State.Distracted;
+    }
+
+    private void Drop()
+    { 
+    
+    }
+
+    public void StateCarry()
+    {
+        catstate = State.Carry;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == Player)
+        {
+            hearCommands = true;
+            Debug.Log("Can hear commands");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == Player)
+        {
+            hearCommands = false;
+            Debug.Log("Cant hear commands");
         }
     }
 }
