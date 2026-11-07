@@ -83,19 +83,28 @@ public class CopycatBehaviour : MonoBehaviour
     public void StateIdle()
     {
         Debug.Log("Idle called");
-        catstate = State.Idle;
+        if (hearCommands) 
+        { 
+            catstate = State.Idle; 
+        }
     }
 
     public void StateFollow()
     {
         Debug.Log("Follow called");
-        catstate = State.Follow;
+        if (hearCommands)
+        {
+            catstate = State.Follow;
+        }
     }
 
     public void StateDistracted()
     {
-        if(catstate == State.Carry) Drop();
-        catstate = State.Distracted;
+        if (hearCommands)
+        {
+            if (catstate == State.Carry) Drop();
+            catstate = State.Distracted;
+        }
     }
 
     private void Drop()
@@ -105,7 +114,10 @@ public class CopycatBehaviour : MonoBehaviour
 
     public void StateCarry()
     {
-        catstate = State.Carry;
+        if (hearCommands)
+        {
+            catstate = State.Carry;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -113,7 +125,8 @@ public class CopycatBehaviour : MonoBehaviour
         if (other.gameObject == Player)
         {
             hearCommands = true;
-           // Debug.Log("Can hear commands");
+            Debug.Log(gameObject.name + "Can hear commands");
+            other.gameObject.GetComponent<PlayerBehviour>().cats.Add(gameObject);
         }
     }
 
@@ -122,7 +135,8 @@ public class CopycatBehaviour : MonoBehaviour
         if (other.gameObject == Player)
         {
             hearCommands = false;
-           // Debug.Log("Cant hear commands");
+            Debug.Log(gameObject.name + "Cant hear commands");
+            other.gameObject.GetComponent<PlayerBehviour>().cats.Remove(gameObject);
         }
     }
 }

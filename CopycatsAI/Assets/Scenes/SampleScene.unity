@@ -202,21 +202,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 480809935}
-        m_TargetAssemblyTypeName: CopycatBehaviour, Assembly-CSharp
-        m_MethodName: StateIdle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1325807053}
-        m_TargetAssemblyTypeName: CopycatBehaviour, Assembly-CSharp
-        m_MethodName: StateIdle
+      - m_Target: {fileID: 5726834720631729993}
+        m_TargetAssemblyTypeName: PlayerBehviour, Assembly-CSharp
+        m_MethodName: CatsStay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -665,17 +653,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 418685303}
   m_CullTransparentMesh: 1
---- !u!114 &480809935 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5722290279806527263, guid: 8540e9e285a10f243abd80b09b6c1d7b, type: 3}
-  m_PrefabInstance: {fileID: 6674001983485328256}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cb93f3d716ffa54086107650a15cc20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CopycatBehaviour
 --- !u!4 &480809940 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3490806338180534635, guid: 8540e9e285a10f243abd80b09b6c1d7b, type: 3}
@@ -764,21 +741,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 480809935}
-        m_TargetAssemblyTypeName: CopycatBehaviour, Assembly-CSharp
-        m_MethodName: StateFollow
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1325807053}
-        m_TargetAssemblyTypeName: CopycatBehaviour, Assembly-CSharp
-        m_MethodName: StateFollow
+      - m_Target: {fileID: 5726834720631729993}
+        m_TargetAssemblyTypeName: PlayerBehviour, Assembly-CSharp
+        m_MethodName: CatsFollow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1343,17 +1308,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010145564}
   m_CullTransparentMesh: 1
---- !u!114 &1325807053 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5722290279806527263, guid: 8540e9e285a10f243abd80b09b6c1d7b, type: 3}
-  m_PrefabInstance: {fileID: 775223850}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cb93f3d716ffa54086107650a15cc20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CopycatBehaviour
 --- !u!4 &1325807058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3490806338180534635, guid: 8540e9e285a10f243abd80b09b6c1d7b, type: 3}
@@ -2117,6 +2071,17 @@ PrefabInstance:
       addedObject: {fileID: 330585546}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d38baf4814260aa4e9ab9ed529b3d209, type: 3}
+--- !u!114 &5726834720631729993 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3206553996227719571, guid: d38baf4814260aa4e9ab9ed529b3d209, type: 3}
+  m_PrefabInstance: {fileID: 5726834720631729992}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521428736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62858ed49c80e84482272e6f4b2c5f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerBehviour
 --- !u!1001 &6674001983485328256
 PrefabInstance:
   m_ObjectHideFlags: 0

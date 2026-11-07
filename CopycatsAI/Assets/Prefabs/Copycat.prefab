@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1228018234937042815}
   m_Layer: 0
   m_Name: Copycat
-  m_TagString: Untagged
+  m_TagString: Cat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,6 +162,7 @@ MonoBehaviour:
   decayCoefficent: 2
   catstate: 0
   learningOn: 0
+  hearCommands: 0
 --- !u!65 &1228018234937042815
 BoxCollider:
   m_ObjectHideFlags: 0

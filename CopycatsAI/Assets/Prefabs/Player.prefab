@@ -139,6 +139,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  cats: []
 --- !u!114 &6192844062366602230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,5 +216,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.83
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
