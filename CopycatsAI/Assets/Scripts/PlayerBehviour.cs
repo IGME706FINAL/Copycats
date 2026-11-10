@@ -63,6 +63,16 @@ public class PlayerBehviour : MonoBehaviour
         }
     }
 
+    public void Scold()
+    { 
+    
+    }
+
+    public void Reward()
+    { 
+        
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("cat")) 

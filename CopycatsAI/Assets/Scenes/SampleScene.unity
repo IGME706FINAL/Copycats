@@ -1847,6 +1847,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3206553996227719571, guid: d38baf4814260aa4e9ab9ed529b3d209, type: 3}
+      propertyPath: speed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206553996227719571, guid: d38baf4814260aa4e9ab9ed529b3d209, type: 3}
       propertyPath: Move.m_Name
       value: Move
       objectReference: {fileID: 0}
@@ -2024,11 +2028,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7183599391120583748, guid: d38baf4814260aa4e9ab9ed529b3d209, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.35000038
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7183599391120583748, guid: d38baf4814260aa4e9ab9ed529b3d209, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.5
+      value: -1.28
       objectReference: {fileID: 0}
     - target: {fileID: 7183599391120583748, guid: d38baf4814260aa4e9ab9ed529b3d209, type: 3}
       propertyPath: m_LocalRotation.w

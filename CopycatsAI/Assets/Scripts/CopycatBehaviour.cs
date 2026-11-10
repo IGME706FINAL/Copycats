@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class CopycatBehaviour : MonoBehaviour
 {
@@ -31,6 +33,10 @@ public class CopycatBehaviour : MonoBehaviour
     public bool learningOn;
     //can recieve commands
     public bool hearCommands;
+    //time till we run coroutine again
+    public float distractCheckTime;
+    //check if coroutine is running
+    private bool coRuning = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,14 +48,28 @@ public class CopycatBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        //follow state instructions
-        if (catstate == State.Follow)
+        if (catstate != State.Distracted)
         {
-            SeekPlayer();
-            Seperate();
+            //follow state instructions
+            if (catstate == State.Follow)
+            {
+                SeekPlayer();
+                Seperate();
+            }
+            if (catstate == State.Idle)
+            {
+                rb.linearVelocity = new Vector3(0, 0, 0);
+            }
+            //code to check if cats will become distracted
+            if (coRuning == false)
+            {
+                //stop this coroutine if it is running
+                StopCoroutine(Distract());
+                //if couroutine is not running, start it
+                StartCoroutine(Distract());
+            }
         }
-        if (catstate == State.Idle)
+        else
         {
             rb.linearVelocity = new Vector3(0, 0, 0);
         }
@@ -80,6 +100,7 @@ public class CopycatBehaviour : MonoBehaviour
         }
     }
 
+    //state switches
     public void StateIdle()
     {
         Debug.Log("Idle called");
@@ -100,11 +121,11 @@ public class CopycatBehaviour : MonoBehaviour
 
     public void StateDistracted()
     {
-        if (hearCommands)
-        {
-            if (catstate == State.Carry) Drop();
-            catstate = State.Distracted;
-        }
+        //drop item if they are carrying one
+        if (catstate == State.Carry) Drop();
+        catstate = State.Distracted;
+        Debug.Log("Distract state triggered");
+        
     }
 
     private void Drop()
@@ -119,7 +140,33 @@ public class CopycatBehaviour : MonoBehaviour
             catstate = State.Carry;
         }
     }
+    //scold and reward
+    public void Scolded()
+    { 
+        
+    }
 
+    public void Rewarded()
+    { 
+        
+    }
+
+    //distracted couroutine
+    IEnumerator Distract()
+    {
+        Debug.Log("Distract coroutine running");
+        //coroutine is running
+        coRuning = true;
+        if (Random.value * 100 <= distractPercent)
+        {
+            StateDistracted();
+            
+        }
+        yield return new WaitForSeconds(distractCheckTime);
+        Debug.Log("Distract coroutine stopping");
+        coRuning = false;
+       
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == Player)

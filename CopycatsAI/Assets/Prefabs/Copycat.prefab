@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb93f3d716ffa54086107650a15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CopycatBehaviour
-  distractPercent: 0
+  distractPercent: 35
   affinity: 0
   speed: 0
   Player: {fileID: 0}
@@ -163,6 +163,7 @@ MonoBehaviour:
   catstate: 0
   learningOn: 0
   hearCommands: 0
+  distractCheckTime: 8
 --- !u!65 &1228018234937042815
 BoxCollider:
   m_ObjectHideFlags: 0
