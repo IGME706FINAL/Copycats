@@ -37,6 +37,8 @@ public class CopycatBehaviour : MonoBehaviour
     public float distractCheckTime;
     //check if coroutine is running
     private bool coRuning = false;
+    //bool for distraction tests
+    public bool distractOn;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -61,7 +63,7 @@ public class CopycatBehaviour : MonoBehaviour
                 rb.linearVelocity = new Vector3(0, 0, 0);
             }
             //code to check if cats will become distracted
-            if (coRuning == false)
+            if (coRuning == false && distractOn)
             {
                 //stop this coroutine if it is running
                 StopCoroutine(Distract());
@@ -142,13 +144,34 @@ public class CopycatBehaviour : MonoBehaviour
     }
     //scold and reward
     public void Scolded()
-    { 
-        
+    {
+        if (hearCommands)
+        {
+            if (catstate == State.Distracted)
+            {
+
+            }
+            else 
+            { 
+            
+            }
+        }
+           
     }
 
     public void Rewarded()
-    { 
-        
+    {
+        if (hearCommands)
+        {
+            if (catstate != State.Distracted)
+            { 
+                
+            }
+            else
+            { 
+
+            }
+        }
     }
 
     //distracted couroutine

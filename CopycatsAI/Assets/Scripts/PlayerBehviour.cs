@@ -64,13 +64,19 @@ public class PlayerBehviour : MonoBehaviour
     }
 
     public void Scold()
-    { 
-    
+    {
+        foreach (GameObject cat in cats)
+        {
+            cat.GetComponent<CopycatBehaviour>().Scolded();
+        }
     }
 
     public void Reward()
-    { 
-        
+    {
+        foreach (GameObject cat in cats)
+        {
+            cat.GetComponent<CopycatBehaviour>().Rewarded();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
