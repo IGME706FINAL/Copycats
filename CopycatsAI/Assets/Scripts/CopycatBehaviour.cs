@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class CopycatBehaviour : MonoBehaviour
 {
@@ -46,18 +47,22 @@ public class CopycatBehaviour : MonoBehaviour
     public int affChange;
     //variables for carrying
     public GameObject matToCarry;
+    //nav mesh variables
+    public LayerMask groundMask;
+    NavMeshAgent agent;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         matToCarry = null;
         rb = gameObject.GetComponent<Rigidbody>();
-        
+        agent = gameObject.GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (catstate != State.Distracted)
         {
             //follow state instructions
@@ -269,5 +274,8 @@ public class CopycatBehaviour : MonoBehaviour
     public void pathfind(GameObject destination)
     {
         Debug.Log("Pathfind called");
+        rb.linearVelocity = new Vector3(0, 0, 0);
+        agent.SetDestination(destination.transform.position);
+        Debug.Log("Destination position" + destination.transform.position);
     }
 }
