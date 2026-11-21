@@ -39,12 +39,20 @@ public class CopycatBehaviour : MonoBehaviour
     private bool coRuning = false;
     //bool for distraction tests
     public bool distractOn;
-    
+    //lowest affinity can go before the cats stop listining
+    public float affinityLimit;
+    //how much distract and affinity change
+    public int disChange;
+    public int affChange;
+    //variables for carrying
+    public GameObject matToCarry;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // = State.Idle;
+        matToCarry = null;
         rb = gameObject.GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
@@ -61,6 +69,11 @@ public class CopycatBehaviour : MonoBehaviour
             if (catstate == State.Idle)
             {
                 rb.linearVelocity = new Vector3(0, 0, 0);
+            }
+            if (catstate == State.Carry)
+            {
+                SeekObject();
+                Seperate();
             }
             //code to check if cats will become distracted
             if (coRuning == false && distractOn)
@@ -89,6 +102,24 @@ public class CopycatBehaviour : MonoBehaviour
         
     }
 
+    void SeekObject()
+    {
+        if (matToCarry != null)
+        {
+            //move to object
+            Vector3 direction = matToCarry.transform.position - gameObject.transform.position;
+            //reset vector
+            rb.linearVelocity = new Vector3(0, 0, 0);
+            direction.Normalize();
+            direction *= speed;
+            rb.linearVelocity = direction - rb.linearVelocity;
+        }
+        else
+        { 
+            
+        }
+    }
+
     void Seperate()
     {
         //seperation code
@@ -107,7 +138,8 @@ public class CopycatBehaviour : MonoBehaviour
     {
         Debug.Log("Idle called");
         if (hearCommands) 
-        { 
+        {
+            if(catstate == State.Carry)Drop();
             catstate = State.Idle; 
         }
     }
@@ -117,6 +149,7 @@ public class CopycatBehaviour : MonoBehaviour
         Debug.Log("Follow called");
         if (hearCommands)
         {
+            if(catstate == State.Carry)Drop();
             catstate = State.Follow;
         }
     }
@@ -131,46 +164,48 @@ public class CopycatBehaviour : MonoBehaviour
     }
 
     private void Drop()
-    { 
-    
+    {
+       matToCarry.GetComponent<MaterialBehaviour>().RemoveCats(gameObject);
     }
 
     public void StateCarry()
     {
-        if (hearCommands)
+        if (hearCommands && matToCarry !=null)
         {
             catstate = State.Carry;
+            CarryObject();
         }
     }
     //scold and reward
     public void Scolded()
     {
-        if (hearCommands)
+        Debug.Log("Scolded");
+        if (hearCommands && learningOn)
         {
             if (catstate == State.Distracted)
             {
-
+                distractPercent -= disChange;
+                catstate = State.Follow;
             }
-            else 
-            { 
-            
-            }
+            affinity -= affChange;
         }
            
     }
 
     public void Rewarded()
     {
-        if (hearCommands)
+        Debug.Log("Rewarded");
+        if (hearCommands && learningOn)
         {
             if (catstate != State.Distracted)
-            { 
-                
+            {
+                distractPercent -= disChange;
             }
-            else
-            { 
-
+            else 
+            {
+                distractPercent += disChange;
             }
+            affinity += affChange;
         }
     }
 
@@ -198,6 +233,13 @@ public class CopycatBehaviour : MonoBehaviour
             Debug.Log(gameObject.name + "Can hear commands");
             other.gameObject.GetComponent<PlayerBehviour>().cats.Add(gameObject);
         }
+
+        if (other.tag == "Material")
+        {
+            Debug.Log("Mat to Carry added");
+            matToCarry = other.gameObject;
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -208,5 +250,24 @@ public class CopycatBehaviour : MonoBehaviour
             Debug.Log(gameObject.name + "Cant hear commands");
             other.gameObject.GetComponent<PlayerBehviour>().cats.Remove(gameObject);
         }
+        if (other.gameObject.tag == "Material")
+        {
+            Debug.Log("Mat to Carry removed");
+            matToCarry = null;
+        }
+    }
+
+    private void CarryObject()
+    {
+        if (matToCarry != null && matToCarry.GetComponent<MaterialBehaviour>().GetCarrying() == false)
+        {
+            SeekObject();
+            matToCarry.GetComponent<MaterialBehaviour>().AddCats(gameObject);
+        }
+    }
+
+    public void pathfind(GameObject destination)
+    {
+        Debug.Log("Pathfind called");
     }
 }

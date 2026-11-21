@@ -164,6 +164,11 @@ MonoBehaviour:
   learningOn: 0
   hearCommands: 0
   distractCheckTime: 8
+  distractOn: 0
+  affinityLimit: 0
+  disChange: 5
+  affChange: 2
+  matToCarry: {fileID: 0}
 --- !u!65 &1228018234937042815
 BoxCollider:
   m_ObjectHideFlags: 0
