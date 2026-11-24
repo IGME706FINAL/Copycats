@@ -156,16 +156,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CopycatBehaviour
   distractPercent: 35
-  affinity: 0
+  affinity: 10
   speed: 2
   Player: {fileID: 0}
   seperationThresh: 4
   decayCoefficent: 2
   catstate: 0
-  learningOn: 0
+  learningOn: 1
   hearCommands: 0
   distractCheckTime: 8
-  distractOn: 0
+  distractOn: 1
   affinityLimit: 0
   disChange: 5
   affChange: 2

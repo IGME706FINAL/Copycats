@@ -65,40 +65,44 @@ public class CopycatBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (catstate != State.Distracted)
+        if (affinity > affinityLimit)
         {
-            //follow state instructions
-            if (catstate == State.Follow)
+            if (catstate != State.Distracted)
             {
-                SeekPlayer();
-                Seperate();
+                //follow state instructions
+                if (catstate == State.Follow)
+                {
+                    SeekPlayer();
+                    Seperate();
+                }
+                if (catstate == State.Idle)
+                {
+                    rb.linearVelocity = new Vector3(0, 0, 0);
+                }
+                if (catstate == State.Carry)
+                {
+                    if (pathfinding) SeekObject();
+
+                }
+                //code to check if cats will become distracted
+                if (coRuning == false && distractOn)
+                {
+                    //stop this coroutine if it is running
+                    StopCoroutine(Distract());
+                    //if couroutine is not running, start it
+                    StartCoroutine(Distract());
+                }
+
             }
-            if (catstate == State.Idle)
+            else
             {
                 rb.linearVelocity = new Vector3(0, 0, 0);
-            }
-            if (catstate == State.Carry)
-            {
-                if(pathfinding)SeekObject();
-              
-            }
-            //code to check if cats will become distracted
-            if (coRuning == false && distractOn)
-            {
-                //stop this coroutine if it is running
-                StopCoroutine(Distract());
-                //if couroutine is not running, start it
-                StartCoroutine(Distract());
-            }
-            if (catstate == State.Dead)
-            {
-                pathfind(testObject);
             }
         }
         else
         {
-            rb.linearVelocity = new Vector3(0, 0, 0);
+            Debug.Log("SCREW YOU GUYS I'M GOING HOME!!!");
+            Seperate();
         }
     }
 
