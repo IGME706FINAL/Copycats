@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI;
 public class MaterialBehaviour : MonoBehaviour
 {
     //if max amounts of cats are on this object/if object is carried
@@ -16,7 +17,8 @@ public class MaterialBehaviour : MonoBehaviour
     //cats carrying
     public List<GameObject> cats;
     private Rigidbody rb;
-    
+    //how fast it moves to center of object
+    public float followSpeed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,6 +37,10 @@ public class MaterialBehaviour : MonoBehaviour
         {
             
             seekCenter();
+        }
+        if (carrying == false)
+        {
+            rb.linearVelocity = new Vector3(0, 0, 0);
         }
     }
 
@@ -65,7 +71,21 @@ public class MaterialBehaviour : MonoBehaviour
     {
         if (collision.gameObject.tag == "Obstacle")
         {
+            Debug.Log("obstacle on collison");
             collision.gameObject.GetComponent<ObstacleBehavior>().matAdded();
+            Destroy(gameObject);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Obstacle")
+        {
+            Debug.Log("obstacle on trigger");
+            other.gameObject.GetComponent<ObstacleBehavior>().matAdded();
+            foreach (GameObject cat in cats)
+            {
+                cat.GetComponent<CopycatBehaviour>().stopPathfind();
+            }
             Destroy(gameObject);
         }
     }
@@ -87,6 +107,7 @@ public class MaterialBehaviour : MonoBehaviour
         //reset vector
         rb.linearVelocity = new Vector3(0, 0, 0);
         direction.Normalize();
+        direction *= followSpeed;
         rb.linearVelocity = direction - rb.linearVelocity;
     }
 
@@ -96,6 +117,7 @@ public class MaterialBehaviour : MonoBehaviour
         foreach (GameObject cat in cats)
         {
             cat.GetComponent<CopycatBehaviour>().pathfind(toObstacle);
+           
         }
     }
 }

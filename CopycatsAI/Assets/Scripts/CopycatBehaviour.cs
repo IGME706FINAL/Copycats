@@ -49,7 +49,10 @@ public class CopycatBehaviour : MonoBehaviour
     public GameObject matToCarry;
     //nav mesh variables
     public LayerMask groundMask;
-    NavMeshAgent agent;
+    private NavMeshAgent agent;
+    public GameObject testObject;
+    //carrying bool
+    public bool pathfinding;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -77,8 +80,8 @@ public class CopycatBehaviour : MonoBehaviour
             }
             if (catstate == State.Carry)
             {
-                SeekObject();
-                Seperate();
+                if(pathfinding)SeekObject();
+              
             }
             //code to check if cats will become distracted
             if (coRuning == false && distractOn)
@@ -87,6 +90,10 @@ public class CopycatBehaviour : MonoBehaviour
                 StopCoroutine(Distract());
                 //if couroutine is not running, start it
                 StartCoroutine(Distract());
+            }
+            if (catstate == State.Dead)
+            {
+                pathfind(testObject);
             }
         }
         else
@@ -111,6 +118,7 @@ public class CopycatBehaviour : MonoBehaviour
     {
         if (matToCarry != null)
         {
+            Debug.Log("seek object");
             //move to object
             Vector3 direction = matToCarry.transform.position - gameObject.transform.position;
             //reset vector
@@ -119,10 +127,7 @@ public class CopycatBehaviour : MonoBehaviour
             direction *= speed;
             rb.linearVelocity = direction - rb.linearVelocity;
         }
-        else
-        { 
-            
-        }
+        
     }
 
     void Seperate()
@@ -141,7 +146,7 @@ public class CopycatBehaviour : MonoBehaviour
     //state switches
     public void StateIdle()
     {
-        Debug.Log("Idle called");
+        //Debug.Log("Idle called");
         if (hearCommands) 
         {
             if(catstate == State.Carry)Drop();
@@ -151,7 +156,7 @@ public class CopycatBehaviour : MonoBehaviour
 
     public void StateFollow()
     {
-        Debug.Log("Follow called");
+        //Debug.Log("Follow called");
         if (hearCommands)
         {
             if(catstate == State.Carry)Drop();
@@ -170,7 +175,9 @@ public class CopycatBehaviour : MonoBehaviour
 
     private void Drop()
     {
-       matToCarry.GetComponent<MaterialBehaviour>().RemoveCats(gameObject);
+        rb.linearVelocity = new Vector3(0, 0, 0);
+        stopPathfind();
+        if(matToCarry != null)matToCarry.GetComponent<MaterialBehaviour>().RemoveCats(gameObject);
     }
 
     public void StateCarry()
@@ -178,6 +185,7 @@ public class CopycatBehaviour : MonoBehaviour
         if (hearCommands && matToCarry !=null)
         {
             catstate = State.Carry;
+            rb.linearVelocity = new Vector3(0, 0, 0);
             CarryObject();
         }
     }
@@ -232,10 +240,10 @@ public class CopycatBehaviour : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == Player)
+        if (other.gameObject == Player && other.gameObject.GetComponent<PlayerBehviour>().cats.Contains(gameObject) == false)
         {
             hearCommands = true;
-            Debug.Log(gameObject.name + "Can hear commands");
+            //Debug.Log(gameObject.name + "Can hear commands");
             other.gameObject.GetComponent<PlayerBehviour>().cats.Add(gameObject);
         }
 
@@ -252,12 +260,17 @@ public class CopycatBehaviour : MonoBehaviour
         if (other.gameObject == Player)
         {
             hearCommands = false;
-            Debug.Log(gameObject.name + "Cant hear commands");
+            //Debug.Log(gameObject.name + "Cant hear commands");
             other.gameObject.GetComponent<PlayerBehviour>().cats.Remove(gameObject);
         }
         if (other.gameObject.tag == "Material")
         {
             Debug.Log("Mat to Carry removed");
+            if (catstate == State.Carry)
+            {
+                catstate = State.Idle;
+                Drop();
+            }
             matToCarry = null;
         }
     }
@@ -275,7 +288,17 @@ public class CopycatBehaviour : MonoBehaviour
     {
         Debug.Log("Pathfind called");
         rb.linearVelocity = new Vector3(0, 0, 0);
+        //agent.isStopped = false;
+        testObject = destination;
         agent.SetDestination(destination.transform.position);
-        Debug.Log("Destination position" + destination.transform.position);
+        //Debug.Log("Destination position" + destination.transform.position);
+        pathfinding = true;
+        
+    }
+    public void stopPathfind()
+    {
+        Debug.Log("stopPathfind called");
+        agent.isStopped = true;
+        pathfinding = false;
     }
 }

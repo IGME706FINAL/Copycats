@@ -135,6 +135,7 @@ MonoBehaviour:
   toObstacle: {fileID: 0}
   centerPoint: {x: 0, y: 0, z: 0}
   cats: []
+  followSpeed: 4
 --- !u!54 &-5893229411510518404
 Rigidbody:
   m_ObjectHideFlags: 0

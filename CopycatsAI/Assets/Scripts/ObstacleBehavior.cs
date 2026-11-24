@@ -21,6 +21,7 @@ public class ObstacleBehavior : MonoBehaviour
 
     public void matAdded()
     {
+        Debug.Log("MatAdded");
         matNeeded--;
     }
 }
