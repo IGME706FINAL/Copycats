@@ -182,6 +182,7 @@ public class CopycatBehaviour : MonoBehaviour
         rb.linearVelocity = new Vector3(0, 0, 0);
         stopPathfind();
         if(matToCarry != null)matToCarry.GetComponent<MaterialBehaviour>().RemoveCats(gameObject);
+        matToCarry = null;
     }
 
     public void StateCarry()

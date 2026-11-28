@@ -52,7 +52,7 @@ public class MaterialBehaviour : MonoBehaviour
     public void AddCats(GameObject cat)
     {
         catsCarying++;
-        cats.Add(cat);
+        if(cats.Contains(cat) == false)cats.Add(cat);
         if (catsCarying >= weight) 
         { 
             carrying = true;
@@ -63,7 +63,7 @@ public class MaterialBehaviour : MonoBehaviour
     public void RemoveCats(GameObject cat)
     {
         catsCarying--;
-        cats.Remove(cat);
+        if (cats.Contains(cat)) cats.Remove(cat);
         if (catsCarying < weight) carrying = false;
     }
 
